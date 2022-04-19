@@ -7,6 +7,7 @@ let invadersId
 let goingRight = true
 let aliensRemoved = []
 let results = 0
+let isGameOn = true
 
 for (let i = 0; i < 225; i++) {
   const square = document.createElement('div')
@@ -84,24 +85,33 @@ function moveInvaders() {
   draw()
 
   if (squares[currentShooterIndex].classList.contains('invader', 'shooter')) {
-    resultsDisplay.innerHTML = 'GAME OVER'
-    clearInterval(invadersId)
-  }
+    gameOver(false)
+}
 
   for (let i = 0; i < alienInvaders.length; i++) {
     if(alienInvaders[i] >= (squares.length)) {
-      resultsDisplay.innerHTML = 'GAME OVER'
-      clearInterval(invadersId)
+        gameOver(false)
     }
   }
   if (aliensRemoved.length === alienInvaders.length) {
-    resultsDisplay.innerHTML = 'YOU WIN'
-    clearInterval(invadersId)
+    gameOver(true)
   }
 }
 
+function gameOver(isWin) {
+    if(isWin) {
+        resultsDisplay.innerHTML = 'YOU WIN'
+        clearInterval(invadersId)
+        isGameOn = false
+    } else {
+        resultsDisplay.innerHTML = 'GAME OVER'
+        clearInterval(invadersId)
+        isGameOn = false
+    }
+}
 
-invadersId = setInterval(moveInvaders, 60)
+
+invadersId = setInterval(moveInvaders, 600)
 
 function shoot(e) {
   let laserId
@@ -137,10 +147,13 @@ function shoot(e) {
 
 
   }
-  switch(e.key) {
-    case ' ':
-      laserId = setInterval(moveLaser, 100)
-  }
+    if(isGameOn) {
+        switch(e.key) {
+            case ' ':
+                laserId = setInterval(moveLaser, 100)
+      }
+    }
+
 }
 
 document.addEventListener('keydown', shoot)
