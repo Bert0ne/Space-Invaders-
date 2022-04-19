@@ -1,6 +1,6 @@
 const grid = document.querySelector('.grid')
 const resultsDisplay = document.querySelector('.results')
-let currentShooterIndex = 202
+let currentShooterIndex = 210
 let width = 15
 let direction = 1
 let invadersId
@@ -23,7 +23,7 @@ const alienInvaders = [
 
 function draw() {
   for (let i = 0; i < alienInvaders.length; i++) {
-    if(!aliensRemoved.includes(i)) {
+    if(!aliensRemoved.includes(i) && squares[alienInvaders[i]]) {
       squares[alienInvaders[i]].classList.add('invader')
     }
   }
@@ -33,7 +33,9 @@ draw()
 
 function remove() {
   for (let i = 0; i < alienInvaders.length; i++) {
-    squares[alienInvaders[i]].classList.remove('invader')
+      if(squares[alienInvaders[i]].classList.contains('invader')) {
+          squares[alienInvaders[i]].classList.remove('invader')
+      }
   }
 }
 
@@ -87,7 +89,7 @@ function moveInvaders() {
   }
 
   for (let i = 0; i < alienInvaders.length; i++) {
-    if(alienInvaders[i] > (squares.length)) {
+    if(alienInvaders[i] >= (squares.length)) {
       resultsDisplay.innerHTML = 'GAME OVER'
       clearInterval(invadersId)
     }
@@ -97,6 +99,8 @@ function moveInvaders() {
     clearInterval(invadersId)
   }
 }
+
+
 invadersId = setInterval(moveInvaders, 60)
 
 function shoot(e) {
@@ -128,7 +132,6 @@ function shoot(e) {
             aliensRemoved.push(alienRemoved)
             results++
             resultsDisplay.innerHTML = results
-    
         }    
     } 
 
