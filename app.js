@@ -123,11 +123,13 @@ function gameOver(isWin) {
         resultsDisplay.innerHTML = 'GAME OVER'
         clearInterval(invadersId)
         isGameOn = false
+        squares[currentShooterIndex].classList.remove('shooter')
+        squares[currentShooterIndex].classList.add('shipBoom')
     }
 }
 
 
-invadersId = setInterval(moveInvaders, 600)
+invadersId = setInterval(moveInvaders, 50)
 
 function shoot(e) {
   let laserId
