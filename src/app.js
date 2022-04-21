@@ -5,6 +5,13 @@ const laserShotSound = document.querySelector(`audio[data-sound="laserShot"]`);
 const alienKillSound = document.querySelector(`audio[data-sound="alienKill"]`)
 const shipDestroySound = document.querySelector(`audio[data-sound="shipDestroy"]`)
 
+const bcgSound1 = document.querySelector(`audio[data-sound="backgroundSound1"]`)
+const bcgSound2 = document.querySelector(`audio[data-sound="backgroundSound2"]`)
+const bcgSound3 = document.querySelector(`audio[data-sound="backgroundSound3"]`)
+const bcgSound4 = document.querySelector(`audio[data-sound="backgroundSound4"]`)
+
+let backgroundSoundplay;
+
 
 let currentShooterIndex = 217
 let width = 15
@@ -125,6 +132,8 @@ function gameOver(isWin) {
         resultsDisplay.innerHTML = 'YOU WIN'
         clearInterval(invadersId)
         isGameOn = false
+
+        clearInterval(backgroundSoundplay)
     } else {
         resultsDisplay.innerHTML = 'GAME OVER'
         clearInterval(invadersId)
@@ -135,11 +144,14 @@ function gameOver(isWin) {
         isGameOn = false
         squares[currentShooterIndex].classList.remove('shooter')
         squares[currentShooterIndex].classList.add('shipBoom')
+
+        clearInterval(backgroundSoundplay)
+
     }
 }
 
 
-invadersId = setInterval(moveInvaders, 50)
+invadersId = setInterval(moveInvaders, 500)
 
 function shoot(e) {
   let laserId
@@ -199,3 +211,30 @@ function shoot(e) {
 }
 
 document.addEventListener('keydown', shoot)
+
+function backgroundSoundTrack() {
+
+  backgroundSoundplay = setInterval(() => {
+    bcgSound1.currentTime = 0;
+    bcgSound1.play()
+
+    setTimeout(() => {
+      bcgSound2.currentTime = 0;
+      bcgSound2.play()
+
+      setTimeout(() => {
+        bcgSound3.currentTime = 0;
+        bcgSound3.play()
+
+        setTimeout(() => {
+          bcgSound4.currentTime = 0;
+          bcgSound4.play()
+
+        }, 500);
+      }, 500);
+    }, 500);
+
+  }, 2000);
+}
+
+backgroundSoundTrack()
