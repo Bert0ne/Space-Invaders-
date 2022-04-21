@@ -66,7 +66,16 @@ body {
 	background-position: center;}
 
 .boom {
-	background-color: red;
+	animation: boomInv 150ms linear;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 
-
+@keyframes boomInv {
+	 0%   	  { background-image: url('./src/img/invader_death01.png'); }
+	20% 	  { background-image: url('./src/img/invader_death02.png'); }
+	40% 	  { background-image: url('./src/img/invader_death03.png'); }
+	50% 	  { background-image: url('./src/img/invader_death04.png'); }
+	60% 	  { background-image: url('./src/img/invader_death05.png'); }
+}

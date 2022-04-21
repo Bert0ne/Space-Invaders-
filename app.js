@@ -1,6 +1,6 @@
 const grid = document.querySelector('.grid')
 const resultsDisplay = document.querySelector('.results')
-let currentShooterIndex = 210
+let currentShooterIndex = 217
 let width = 15
 let direction = 1
 let invadersId
@@ -127,7 +127,7 @@ function gameOver(isWin) {
 }
 
 
-invadersId = setInterval(moveInvaders, 500)
+invadersId = setInterval(moveInvaders, 600)
 
 function shoot(e) {
   let laserId
@@ -148,10 +148,10 @@ function shoot(e) {
 
             if (squares[currentLaserIndex].classList.contains('invader')) {
             squares[currentLaserIndex].classList.remove('laser')
-            squares[currentLaserIndex].classList.remove('invader')
+            squares[currentLaserIndex].classList.remove('invader','invader-1','invader-2','invader-3')
             squares[currentLaserIndex].classList.add('boom')
         
-            setTimeout(()=> squares[currentLaserIndex].classList.remove('boom'), 300)
+            setTimeout(()=> squares[currentLaserIndex].classList.remove('boom'), 150)
             clearInterval(laserId)
         
             const alienRemoved = alienInvaders.indexOf(currentLaserIndex)
@@ -171,7 +171,7 @@ function shoot(e) {
                 isTimeForMissle = false
                 setTimeout(() => {
                   isTimeForMissle = true
-                }, 1000);
+                }, 700);
       }
     }
 
