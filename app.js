@@ -8,6 +8,7 @@ let goingRight = true
 let aliensRemoved = []
 let results = 0
 let isGameOn = true
+let isTimeForMissle = true
 
 for (let i = 0; i < 225; i++) {
   const square = document.createElement('div')
@@ -114,7 +115,7 @@ function gameOver(isWin) {
 }
 
 
-invadersId = setInterval(moveInvaders, 60)
+invadersId = setInterval(moveInvaders, 600)
 
 function shoot(e) {
   let laserId
@@ -150,10 +151,14 @@ function shoot(e) {
 
 
   }
-    if(isGameOn) {
+    if(isGameOn && isTimeForMissle) {
         switch(e.key) {
             case ' ':
                 laserId = setInterval(moveLaser, 100)
+                isTimeForMissle = false
+                setTimeout(() => {
+                  isTimeForMissle = true
+                }, 1000);
       }
     }
 
