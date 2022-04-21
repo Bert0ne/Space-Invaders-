@@ -24,9 +24,21 @@ const alienInvaders = [
 ]
 
 function draw() {
-  for (let i = 0; i < alienInvaders.length; i++) {
+  for (let i = 20; i < 30; i++) {
     if(!aliensRemoved.includes(i) && squares[alienInvaders[i]]) {
-      squares[alienInvaders[i]].classList.add('invader')
+      squares[alienInvaders[i]].classList.add('invader','invader-3')
+    }
+  }
+
+  for (let i = 10; i < 20; i++) {
+    if(!aliensRemoved.includes(i) && squares[alienInvaders[i]]) {
+      squares[alienInvaders[i]].classList.add('invader','invader-2')
+    }
+  }
+
+  for (let i = 0; i < 10; i++) {
+    if(!aliensRemoved.includes(i) && squares[alienInvaders[i]]) {
+      squares[alienInvaders[i]].classList.add('invader','invader-1')
     }
   }
 }
@@ -36,7 +48,7 @@ draw()
 function remove() {
   for (let i = 0; i < alienInvaders.length; i++) {
       if(squares[alienInvaders[i]].classList.contains('invader')) {
-          squares[alienInvaders[i]].classList.remove('invader')
+          squares[alienInvaders[i]].classList.remove('invader','invader-1','invader-2','invader-3')
       }
   }
 }
@@ -115,7 +127,7 @@ function gameOver(isWin) {
 }
 
 
-invadersId = setInterval(moveInvaders, 600)
+invadersId = setInterval(moveInvaders, 500)
 
 function shoot(e) {
   let laserId
@@ -155,6 +167,7 @@ function shoot(e) {
         switch(e.key) {
             case ' ':
                 laserId = setInterval(moveLaser, 100)
+                
                 isTimeForMissle = false
                 setTimeout(() => {
                   isTimeForMissle = true

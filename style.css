@@ -17,18 +17,56 @@ body {
 }
 
 .invader {
-	background-color: purple;
-	border-radius: 10px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+ }
+ 
+ .invader-1 {
+	animation: inv1 500ms infinite;
+ } 
+
+ .invader-2 {
+	animation: inv2 500ms infinite;
+ }
+
+ .invader-3 {
+	animation: inv3 500ms infinite;
+ }
+
+ @keyframes inv1 {
+	0% 	  { background-image: url('./src/img/invader_a01.png'); }
+	50%   { background-image: url('./src/img/invader_a02.png'); }
+	100%  { background-image: url('./src/img/invader_a01.png'); }
+}
+
+@keyframes inv2 {
+	0% 	  { background-image: url('./src/img/invader_b01.png'); }
+	50%   { background-image: url('./src/img/invader_b02.png'); }
+	100%  { background-image: url('./src/img/invader_b01.png'); }
+}
+
+@keyframes inv3 {
+	0% 	  { background-image: url('./src/img/invader_c01.png'); }
+	50%   { background-image: url('./src/img/invader_c02.png'); }
+	100%  { background-image: url('./src/img/invader_c01.png'); }
 }
 
 .shooter {
-	background-color: green;
+	background-image: url('./src/img/player.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 
 .laser {
-	background-color: orange;
-}
+	background-image: url('./src/img/powerup_blue01.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;}
 
 .boom {
 	background-color: red;
 }
+
+
