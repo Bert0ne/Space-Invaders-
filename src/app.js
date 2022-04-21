@@ -1,5 +1,11 @@
 const grid = document.querySelector('.grid')
 const resultsDisplay = document.querySelector('.results')
+
+const laserShotSound = document.querySelector(`audio[data-sound="laserShot"]`);
+const alienKillSound = document.querySelector(`audio[data-sound="alienKill"]`)
+const shipDestroySound = document.querySelector(`audio[data-sound="shipDestroy"]`)
+
+
 let currentShooterIndex = 217
 let width = 15
 let direction = 1
@@ -122,6 +128,10 @@ function gameOver(isWin) {
     } else {
         resultsDisplay.innerHTML = 'GAME OVER'
         clearInterval(invadersId)
+
+        shipDestroySound.currentTime = 0;
+        shipDestroySound.play()
+
         isGameOn = false
         squares[currentShooterIndex].classList.remove('shooter')
         squares[currentShooterIndex].classList.add('shipBoom')
@@ -133,6 +143,9 @@ invadersId = setInterval(moveInvaders, 50)
 
 function shoot(e) {
   let laserId
+  
+
+
   let currentLaserIndex = currentShooterIndex
   function moveLaser() {
         if(squares[currentLaserIndex]) {
@@ -152,6 +165,9 @@ function shoot(e) {
             squares[currentLaserIndex].classList.remove('laser')
             squares[currentLaserIndex].classList.remove('invader','invader-1','invader-2','invader-3')
             squares[currentLaserIndex].classList.add('boom')
+
+            alienKillSound.currentTime = 0;
+            alienKillSound.play()
         
             setTimeout(()=> squares[currentLaserIndex].classList.remove('boom'), 150)
             clearInterval(laserId)
@@ -170,6 +186,9 @@ function shoot(e) {
             case ' ':
                 laserId = setInterval(moveLaser, 100)
                 
+                laserShotSound.currentTime = 0;
+                laserShotSound.play()
+
                 isTimeForMissle = false
                 setTimeout(() => {
                   isTimeForMissle = true
