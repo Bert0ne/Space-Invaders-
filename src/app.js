@@ -35,7 +35,9 @@ playGameBtn.forEach(el => {
 });
 
 function init() {
-  newGameContainer.classList.add('hide')
+  newGameContainer.classList.add('hide');
+  isGameOn = false;
+  
   setTimeout(() => {
     direction = 1;    
     goodLuck.classList.add('hide')
@@ -175,8 +177,21 @@ function restartGame() {
   init()
 }
 
+function songsStop() {
+  bcgSound1.pause();
+  bcgSound1.currentTime = 0;
+  bcgSound2.pause();
+  bcgSound2.currentTime = 0;
+  bcgSound3.pause();
+  bcgSound3.currentTime = 0;
+  bcgSound4.pause();
+  bcgSound4.currentTime = 0;
+}
+
 function gameOver(isWin) {
     if(isWin) {
+      clearInterval(backgroundSoundplay);
+        songsStop()
         winBoard.classList.remove('hide');
         clearInterval(invadersId);
         isGameOn = false;
@@ -185,9 +200,10 @@ function gameOver(isWin) {
         winBtnRestar.addEventListener('click', restartGame)
 
     } else {
+      clearInterval(backgroundSoundplay)
         resultsDisplay.innerHTML = 'GAME OVER'
         clearInterval(invadersId)
-
+        songsStop()
         shipDestroySound.currentTime = 0;
         shipDestroySound.play()
 
@@ -195,7 +211,6 @@ function gameOver(isWin) {
         squares[currentShooterIndex].classList.remove('shooter')
         squares[currentShooterIndex].classList.add('shipBoom')
 
-        clearInterval(backgroundSoundplay)
     }
 }
 
