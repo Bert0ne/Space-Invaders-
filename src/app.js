@@ -1,30 +1,52 @@
-const grid = document.querySelector('.grid')
-const resultsDisplay = document.querySelector('.results')
+const grid = document.querySelector('.grid');
+const resultsDisplay = document.querySelector('.results');
 const aliensSpeed = 500
 
-let aliensMainBoard = document.querySelectorAll('.alien');
+const aliensMainBoard = document.querySelectorAll('.alien');
 const laserShotSound = document.querySelector(`audio[data-sound="laserShot"]`);
-const alienKillSound = document.querySelector(`audio[data-sound="alienKill"]`)
-const shipDestroySound = document.querySelector(`audio[data-sound="shipDestroy"]`)
+const alienKillSound = document.querySelector(`audio[data-sound="alienKill"]`);
+const shipDestroySound = document.querySelector(`audio[data-sound="shipDestroy"]`);
+const playGameBtn = document.querySelectorAll('.newGame_board h2');
+const newGameContainer = document.querySelector('.newGame__container');
+const goodLuck = document.querySelector('.goodLuck');
+const winBoard = document.querySelector('.win_board ');
+const winBtnRestar = document.querySelector('.win_board button');
 
-const bcgSound1 = document.querySelector(`audio[data-sound="backgroundSound1"]`)
-const bcgSound2 = document.querySelector(`audio[data-sound="backgroundSound2"]`)
-const bcgSound3 = document.querySelector(`audio[data-sound="backgroundSound3"]`)
-const bcgSound4 = document.querySelector(`audio[data-sound="backgroundSound4"]`)
+
+const bcgSound1 = document.querySelector(`audio[data-sound="backgroundSound1"]`);
+const bcgSound2 = document.querySelector(`audio[data-sound="backgroundSound2"]`);
+const bcgSound3 = document.querySelector(`audio[data-sound="backgroundSound3"]`);
+const bcgSound4 = document.querySelector(`audio[data-sound="backgroundSound4"]`);
+
 
 let backgroundSoundplay;
+let currentShooterIndex = 217;
+let width = 15;
+let direction = 0;
+let invadersId;
+let goingRight = true;
+let aliensRemoved = [];
+let results = 0;
+let isGameOn = false;
+let isTimeForMissle = true;
 
-backgroundSoundTrack()
+playGameBtn.forEach(el => {
+  el.addEventListener('click', init)
+});
 
-let currentShooterIndex = 217
-let width = 15
-let direction = 1
-let invadersId
-let goingRight = true
-let aliensRemoved = []
-let results = 0
-let isGameOn = true
-let isTimeForMissle = true
+function init() {
+
+  newGameContainer.classList.add('hide')
+  isGameOn = true
+  setTimeout(() => {
+    direction = 1;    
+    goodLuck.classList.add('hide')
+  }, 2000);
+
+  backgroundSoundTrack()
+}
+
+
 
 for (let i = 0; i < 225; i++) {
   const square = document.createElement('div')
@@ -33,7 +55,7 @@ for (let i = 0; i < 225; i++) {
 
 const squares = Array.from(document.querySelectorAll('.grid div'))
 
-const alienInvaders = [
+let alienInvaders = [
   0,1,2,3,4,5,6,7,8,9,
   15,16,17,18,19,20,21,22,23,24,
   30,31,32,33,34,35,36,37,38,39
@@ -130,13 +152,39 @@ function moveInvaders() {
   }
 }
 
+function restartGame() {
+  aliensRemoved = [];
+  alienInvaders = [
+    0,1,2,3,4,5,6,7,8,9,
+    15,16,17,18,19,20,21,22,23,24,
+    30,31,32,33,34,35,36,37,38,39
+  ];
+  draw();
+
+  squares[currentShooterIndex].classList.remove('shooter');
+  currentShooterIndex = 217;
+  squares[currentShooterIndex].classList.add('shooter');
+  results = 0;
+  direction = 0;
+  isGameOn = true;
+  resultsDisplay.innerHTML = '0';
+  
+  winBoard.classList.add('hide');
+  goodLuck.classList.remove('hide')
+  
+  invadersId = setInterval(moveInvaders, aliensSpeed)
+  init()
+}
+
 function gameOver(isWin) {
     if(isWin) {
-        resultsDisplay.innerHTML = 'YOU WIN'
-        clearInterval(invadersId)
-        isGameOn = false
+        winBoard.classList.remove('hide');
+        clearInterval(invadersId);
+        isGameOn = false;
+        clearInterval(backgroundSoundplay);
+        
+        winBtnRestar.addEventListener('click', restartGame)
 
-        clearInterval(backgroundSoundplay)
     } else {
         resultsDisplay.innerHTML = 'GAME OVER'
         clearInterval(invadersId)
@@ -207,7 +255,7 @@ function shoot(e) {
                 isTimeForMissle = false
                 setTimeout(() => {
                   isTimeForMissle = true
-                }, 700);
+                }, 70);
       }
     }
 
@@ -251,12 +299,3 @@ aliensMainBoard.forEach(alien => {
     alien.src = "/src/img/invader_a02.png"
   }, 600);
 })
-
-
-// let alienAnimation = setInterval(() => {
-  
-//   aliensMainBoard.forEach(alient => {
-
-//   })
-
-// }, 500);

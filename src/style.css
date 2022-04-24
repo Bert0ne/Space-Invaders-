@@ -1,17 +1,26 @@
+*,*::after,*::before {
+	margin: 0;
+	padding: 0;
+}
+
 body {
     background-color: black;
     color: #fff;
 	font-family: 'VT323', monospace;
+	overflow:hidden;
+	position: relative;
 }
 
 .newGame__container {
 	position: absolute;
-	width: 100%;
-	height: 100%;
+	width: 100vw;
+	height: 100vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	background-color: #000;
+	z-index: 2;
+	overflow:hidden;
 }
 
 .newGame_board {
@@ -19,10 +28,13 @@ body {
 	flex-direction: column;
 	justify-content: center;
 	text-align: center;
+	overflow:hidden;
 }
 
 .newGame_board h2 {
 	cursor: pointer;
+	overflow: hidden;
+	margin: 5px;
 }
 
 .aliens {
@@ -38,13 +50,26 @@ body {
 	height: 20px;
 }
 
-
 .grid {
 	width: 300px;
 	height: 300px;
-	border: solid #fff 1px;
+	border: 1px solid #fff;
 	display: flex;
 	flex-wrap: wrap;
+	position: relative;
+}
+
+.goodLuck {
+	position: absolute;
+	margin: 50% 27%;
+	white-space: nowrap;
+	overflow:hidden;
+}
+
+.hide {
+	opacity: 0;
+	display: none;
+	visibility: hidden;
 }
 
 .grid div {
@@ -129,4 +154,26 @@ body {
    30% 	 { background-image: url('/src/img/player_death02.png'); }
    60%	 { background-image: url('/src/img/player_death03.png'); }
    100%	 { background-image: url('/src/img/player_death04.png'); }
+}
+
+.win_board {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	background-color: rgba(#000, #000, #000, 0,5);
+	z-index: 2;
+	overflow:hidden;
+	font-size: 1.4rem;
+}
+
+.win_board button {
+	font-family: 'VT323', monospace;
+	padding: 10px 20px;
+	border: 1px dotted white;
+	cursor: pointer;
+	margin-top: 15px;
 }
