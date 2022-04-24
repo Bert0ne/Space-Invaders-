@@ -1,7 +1,43 @@
 body {
     background-color: black;
     color: #fff;
+	font-family: 'VT323', monospace;
 }
+
+.newGame__container {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #000;
+}
+
+.newGame_board {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+}
+
+.newGame_board h2 {
+	cursor: pointer;
+}
+
+.aliens {
+	width: 300px;
+	height: 25px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+.alien {
+	width: 20px;
+	height: 20px;
+}
+
 
 .grid {
 	width: 300px;
@@ -81,7 +117,7 @@ body {
 }
 
 .shipBoom {
-	animation: boomShip 1000ms infinite;
+	animation: boomShip 150ms infinite;
 	animation-direction: alternate-reverse;
 	background-size: cover;
 	background-repeat: no-repeat;

@@ -7,12 +7,39 @@
     <link rel="shortcut icon" href="#" type="image/x-icon">
     <script defer src="./src/app.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <title>Space Invaders</title>
 </head>
 <body> 
 
-    <h1 class="results">0</h1>
-    <div class="grid"></div>
+    <div class="newGame__container">
+        <div class="newGame_board">
+            <h2>Play </span></h2>
+            <h2>Space Invaders</h2>
+            <div class="aliens">
+                <img class="alien" src="./src/img/invader_a01.png" alt="alien guy">
+                <img class="alien" src="./src/img/invader_a01.png" alt="alien guy">
+                <img class="alien" src="./src/img/invader_a01.png" alt="alien guy">
+            </div>
+        </div>
+    </div>
+
+    <div class="game__board">
+        <div class="grid"></div>
+        <h2>Score: <span class="results">0</span></h2>
+    </div>
+
+    <div class="win_board">
+        <div class="win_board__Text">you saved the earth! </div>
+    </div>
+
+    <div class="loose_board">
+        <div class="loose_board-Text">Game Over</div>
+        <button class="tryAgain">Try Again</button>
+    </div>
+
 
     <audio data-sound="laserShot" src="./src/audio/sounds_defender_gun2.wav"></audio>
     <audio data-sound="alienKill" src="./src/audio/sounds_ufo_death.wav"></audio>

@@ -1,6 +1,8 @@
 const grid = document.querySelector('.grid')
 const resultsDisplay = document.querySelector('.results')
+const aliensSpeed = 500
 
+let aliensMainBoard = document.querySelectorAll('.alien');
 const laserShotSound = document.querySelector(`audio[data-sound="laserShot"]`);
 const alienKillSound = document.querySelector(`audio[data-sound="alienKill"]`)
 const shipDestroySound = document.querySelector(`audio[data-sound="shipDestroy"]`)
@@ -12,6 +14,7 @@ const bcgSound4 = document.querySelector(`audio[data-sound="backgroundSound4"]`)
 
 let backgroundSoundplay;
 
+backgroundSoundTrack()
 
 let currentShooterIndex = 217
 let width = 15
@@ -151,7 +154,7 @@ function gameOver(isWin) {
 }
 
 
-invadersId = setInterval(moveInvaders, 500)
+invadersId = setInterval(moveInvaders, aliensSpeed)
 
 function shoot(e) {
   let laserId
@@ -237,4 +240,23 @@ function backgroundSoundTrack() {
   }, 2000);
 }
 
-backgroundSoundTrack()
+
+aliensMainBoard.forEach(alien => {
+
+  setInterval(() => {
+    alien.src = "/src/img/invader_a01.png"
+  }, 300);
+
+  setInterval(() => {
+    alien.src = "/src/img/invader_a02.png"
+  }, 600);
+})
+
+
+// let alienAnimation = setInterval(() => {
+  
+//   aliensMainBoard.forEach(alient => {
+
+//   })
+
+// }, 500);
