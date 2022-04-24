@@ -35,12 +35,11 @@ playGameBtn.forEach(el => {
 });
 
 function init() {
-
   newGameContainer.classList.add('hide')
-  isGameOn = true
   setTimeout(() => {
     direction = 1;    
     goodLuck.classList.add('hide')
+    isGameOn = true
   }, 2000);
 
   backgroundSoundTrack()
@@ -166,7 +165,7 @@ function restartGame() {
   squares[currentShooterIndex].classList.add('shooter');
   results = 0;
   direction = 0;
-  isGameOn = true;
+  isGameOn = false;
   resultsDisplay.innerHTML = '0';
   
   winBoard.classList.add('hide');
@@ -197,7 +196,6 @@ function gameOver(isWin) {
         squares[currentShooterIndex].classList.add('shipBoom')
 
         clearInterval(backgroundSoundplay)
-
     }
 }
 
