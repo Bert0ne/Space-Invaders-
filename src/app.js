@@ -8,9 +8,9 @@ const playGameBtn = document.querySelectorAll('.newGame_board h2');
 const newGameContainer = document.querySelector('.newGame__container');
 const goodLuck = document.querySelector('.goodLuck');
 const winBoard = document.querySelector('.win_board ');
-const winBtnRestart = document.querySelector('.win_board button');
+// const winBtnRestart = document.querySelector('.win_board button');
 const looseBoard = document.querySelector('.loose_board');
-const looseBtnRestart = document.querySelector('.tryAgain');
+// const looseBtnRestart = document.querySelector('.tryAgain');
 const bcgSound1 = document.querySelector(`audio[data-sound="backgroundSound1"]`);
 const bcgSound2 = document.querySelector(`audio[data-sound="backgroundSound2"]`);
 const bcgSound3 = document.querySelector(`audio[data-sound="backgroundSound3"]`);
@@ -196,6 +196,10 @@ function songsStop() {
 }
 
 function gameOver(isWin) {
+  const looseBtnRestart = document.querySelector('.tryAgain');
+  const winBtnRestart = document.querySelector('.win_board button');
+
+
     if(isWin) {
         clearInterval(backgroundSoundplay);
         clearInterval(invadersId);
