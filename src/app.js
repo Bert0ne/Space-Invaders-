@@ -1,6 +1,6 @@
 const grid = document.querySelector('.grid');
 const resultsDisplay = document.querySelector('.results');
-const aliensSpeed = 500
+const aliensSpeed = 500;
 
 const aliensMainBoard = document.querySelectorAll('.alien');
 const laserShotSound = document.querySelector(`audio[data-sound="laserShot"]`);
@@ -10,8 +10,9 @@ const playGameBtn = document.querySelectorAll('.newGame_board h2');
 const newGameContainer = document.querySelector('.newGame__container');
 const goodLuck = document.querySelector('.goodLuck');
 const winBoard = document.querySelector('.win_board ');
-const winBtnRestar = document.querySelector('.win_board button');
-
+const winBtnRestart = document.querySelector('.win_board button');
+const looseBoard = document.querySelector('.loose_board');
+const looseBtnRestart = document.querySelector('.tryAgain');
 
 const bcgSound1 = document.querySelector(`audio[data-sound="backgroundSound1"]`);
 const bcgSound2 = document.querySelector(`audio[data-sound="backgroundSound2"]`);
@@ -154,16 +155,20 @@ function moveInvaders() {
   }
 }
 
+
+
 function restartGame() {
+  remove();
   direction = 0;
   aliensRemoved = [];
+  alienInvaders = [];
   alienInvaders = [
     0,1,2,3,4,5,6,7,8,9,
     15,16,17,18,19,20,21,22,23,24,
     30,31,32,33,34,35,36,37,38,39
   ];
   
-
+  squares[currentShooterIndex].classList.remove('shipBoom')
   squares[currentShooterIndex].classList.remove('shooter');
   currentShooterIndex = 217;
   squares[currentShooterIndex].classList.add('shooter');
@@ -173,7 +178,8 @@ function restartGame() {
   resultsDisplay.innerHTML = '0';
   
   winBoard.classList.add('hide');
-  goodLuck.classList.remove('hide')
+  looseBoard.classList.add('hide');
+  goodLuck.classList.remove('hide');
   invadersId = setInterval(moveInvaders, aliensSpeed)
 
   init()
@@ -192,27 +198,25 @@ function songsStop() {
 
 function gameOver(isWin) {
     if(isWin) {
-      clearInterval(backgroundSoundplay);
+        clearInterval(backgroundSoundplay);
+        clearInterval(invadersId);
         songsStop()
         winBoard.classList.remove('hide');
-        clearInterval(invadersId);
         isGameOn = false;
-        clearInterval(backgroundSoundplay);
         
-        winBtnRestar.addEventListener('click', restartGame)
+        winBtnRestart.addEventListener('click', restartGame)
 
     } else {
-      clearInterval(backgroundSoundplay)
-        resultsDisplay.innerHTML = 'GAME OVER'
+        clearInterval(backgroundSoundplay)
         clearInterval(invadersId)
         songsStop()
+        looseBoard.classList.remove('hide');
         shipDestroySound.currentTime = 0;
         shipDestroySound.play()
-
         isGameOn = false
         squares[currentShooterIndex].classList.remove('shooter')
         squares[currentShooterIndex].classList.add('shipBoom')
-
+        looseBtnRestart.addEventListener('click', restartGame)
     }
 }
 
