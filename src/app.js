@@ -273,7 +273,7 @@ function shoot(e) {
                 isTimeForMissle = false
                 setTimeout(() => {
                   isTimeForMissle = true
-                }, 70);
+                }, 700);
       }
     }
 

@@ -1,3 +1,7 @@
+:root {
+	--grid-size: 50vmin;
+  }
+
 *,*::after,*::before {
 	margin: 0;
 	padding: 0;
@@ -50,31 +54,47 @@ body {
 	height: 20px;
 }
 
+.game__board {
+	width: 100%;
+	height: 100vh;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	position: relative;
+}
+
+.game__board h2:last-child {
+	margin-top: 10px;
+}
+
 .grid {
-	width: 300px;
-	height: 300px;
+	/* 300 */
+	width: var(--grid-size);
+	height: var(--grid-size);
 	border: 1px solid #fff;
 	display: flex;
 	flex-wrap: wrap;
 	position: relative;
 }
 
+.grid div {
+	width: calc(var(--grid-size) / 15);
+	height: calc(var(--grid-size) / 15);
+}
+
+
 .goodLuck {
 	position: absolute;
-	margin: 50% 27%;
 	white-space: nowrap;
-	overflow:hidden;
+	font-size: 2vh;
 }
 
 .hide {
 	opacity: 0;
 	display: none;
 	visibility: hidden;
-}
-
-.grid div {
-	width: 20px;
-	height: 20px;
 }
 
 .invader {
