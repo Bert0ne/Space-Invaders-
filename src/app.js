@@ -1,3 +1,4 @@
+
 const grid = document.querySelector('.grid');
 const resultsDisplay = document.querySelector('.results');
 const aliensMainBoard = document.querySelectorAll('.alien');
@@ -16,6 +17,10 @@ const bcgSound2 = document.querySelector(`audio[data-sound="backgroundSound2"]`)
 const bcgSound3 = document.querySelector(`audio[data-sound="backgroundSound3"]`);
 const bcgSound4 = document.querySelector(`audio[data-sound="backgroundSound4"]`);
 const aliensSpeed = 500;
+
+winBtnRestart.addEventListener('click', restartGame);
+looseBtnRestart.addEventListener('click', restartGame);
+
 
 let backgroundSoundplay;
 let currentShooterIndex = 217;
@@ -198,7 +203,6 @@ function gameOver(isWin) {
         songsStop()
         winBoard.classList.remove('hide');
         isGameOn = false;
-        winBtnRestart.addEventListener('click', restartGame)
 
     } else {
         clearInterval(backgroundSoundplay)
@@ -210,7 +214,6 @@ function gameOver(isWin) {
         isGameOn = false
         squares[currentShooterIndex].classList.remove('shooter')
         squares[currentShooterIndex].classList.add('shipBoom')
-        looseBtnRestart.addEventListener('click', restartGame)
     }
 };
 
