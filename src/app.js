@@ -8,9 +8,9 @@ const playGameBtn = document.querySelectorAll('.newGame_board h2');
 const newGameContainer = document.querySelector('.newGame__container');
 const goodLuck = document.querySelector('.goodLuck');
 const winBoard = document.querySelector('.win_board ');
-// const winBtnRestart = document.querySelector('.win_board button');
+const winBtnRestart = document.querySelector('.win_board button');
 const looseBoard = document.querySelector('.loose_board');
-// const looseBtnRestart = document.querySelector('.tryAgain');
+const looseBtnRestart = document.querySelector('.tryAgain');
 const bcgSound1 = document.querySelector(`audio[data-sound="backgroundSound1"]`);
 const bcgSound2 = document.querySelector(`audio[data-sound="backgroundSound2"]`);
 const bcgSound3 = document.querySelector(`audio[data-sound="backgroundSound3"]`);
@@ -32,7 +32,7 @@ window.addEventListener('DOMContentLoaded', () => {
   playGameBtn.forEach(el => {
     el.addEventListener('click', init)
   });
-})
+});
 
 function init() {
   newGameContainer.classList.add('hide');
@@ -46,22 +46,20 @@ function init() {
   }, 2000);
 
   backgroundSoundTrack()
-}
-
-
+};
 
 for (let i = 0; i < 225; i++) {
   const square = document.createElement('div')
   grid.appendChild(square)
-}
+};
 
-const squares = Array.from(document.querySelectorAll('.grid div'))
+const squares = Array.from(document.querySelectorAll('.grid div'));
 
 let alienInvaders = [
   0,1,2,3,4,5,6,7,8,9,
   15,16,17,18,19,20,21,22,23,24,
   30,31,32,33,34,35,36,37,38,39
-]
+];
 
 function draw() {
   for (let i = 20; i < 30; i++) {
@@ -81,9 +79,9 @@ function draw() {
       squares[alienInvaders[i]].classList.add('invader','invader-1')
     }
   }
-}
+};
 
-draw()
+draw();
 
 function remove() {
   for (let i = 0; i < alienInvaders.length; i++) {
@@ -91,10 +89,9 @@ function remove() {
           squares[alienInvaders[i]].classList.remove('invader','invader-1','invader-2','invader-3')
       }
   }
-}
+};
 
-squares[currentShooterIndex].classList.add('shooter')
-
+squares[currentShooterIndex].classList.add('shooter');
 
 function moveShooter(e) {
   if(isGameOn) {
@@ -111,7 +108,7 @@ function moveShooter(e) {
   }
 }
 
-document.addEventListener('keydown', moveShooter)
+document.addEventListener('keydown', moveShooter);
 
 function moveInvaders() {
   const leftEdge = alienInvaders[0] % width === 0
@@ -152,9 +149,7 @@ function moveInvaders() {
   if (aliensRemoved.length === alienInvaders.length) {
     gameOver(true)
   }
-}
-
-
+};
 
 function restartGame() {
   remove();
@@ -182,7 +177,7 @@ function restartGame() {
   invadersId = setInterval(moveInvaders, aliensSpeed)
 
   init()
-}
+};
 
 function songsStop() {
   bcgSound1.pause();
@@ -193,12 +188,9 @@ function songsStop() {
   bcgSound3.currentTime = 0;
   bcgSound4.pause();
   bcgSound4.currentTime = 0;
-}
+};
 
 function gameOver(isWin) {
-  const looseBtnRestart = document.querySelector('.tryAgain');
-  const winBtnRestart = document.querySelector('.win_board button');
-
 
     if(isWin) {
         clearInterval(backgroundSoundplay);
@@ -206,7 +198,6 @@ function gameOver(isWin) {
         songsStop()
         winBoard.classList.remove('hide');
         isGameOn = false;
-        
         winBtnRestart.addEventListener('click', restartGame)
 
     } else {
@@ -221,16 +212,12 @@ function gameOver(isWin) {
         squares[currentShooterIndex].classList.add('shipBoom')
         looseBtnRestart.addEventListener('click', restartGame)
     }
-}
+};
 
-
-invadersId = setInterval(moveInvaders, aliensSpeed)
+invadersId = setInterval(moveInvaders, aliensSpeed);
 
 function shoot(e) {
   let laserId
-  
-
-
   let currentLaserIndex = currentShooterIndex
   function moveLaser() {
         if(squares[currentLaserIndex]) {
@@ -243,8 +230,6 @@ function shoot(e) {
             } else {
                 squares[currentLaserIndex].classList.add('laser')
             }
-            // squares[currentLaserIndex].classList.add('laser')
-
 
             if (squares[currentLaserIndex].classList.contains('invader')) {
             squares[currentLaserIndex].classList.remove('laser')
@@ -262,10 +247,8 @@ function shoot(e) {
             results++
             resultsDisplay.innerHTML = results
         }    
-    } 
-
-
-  }
+    }
+  };
     if(isGameOn && isTimeForMissle) {
         switch(e.key) {
             case ' ':
@@ -281,9 +264,9 @@ function shoot(e) {
       }
     }
 
-}
+};
 
-document.addEventListener('keydown', shoot)
+document.addEventListener('keydown', shoot);
 
 function backgroundSoundTrack() {
 
@@ -308,8 +291,7 @@ function backgroundSoundTrack() {
     }, 500);
 
   }, 2000);
-}
-
+};
 
 aliensMainBoard.forEach(alien => {
 
@@ -320,4 +302,4 @@ aliensMainBoard.forEach(alien => {
   setInterval(() => {
     alien.src = "/src/img/invader_a02.png"
   }, 600);
-})
+});
